@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	@foreach($Categories as $cate)
+                    	@foreach($categories as $cate)
 	                        <tr>
 	                            <td data-checkbox="true">{{ $cate->id }}</td>
 	                            <td data-checkbox="true"><a href="">{{ $cate->name }}</a></td>						        

@@ -16,21 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('Backend/Layouts/index');
 });
-Route::prefix('Backend')->namespace('Backend')->group(function(){
+Route::prefix('backend')->namespace('Backend')->group(function(){
 	Route::get('/','DashboardController@index')->name('');
-	Route::get('CategoryList','CategoryController@index')->name('CategoryList');
-	Route::get('AddCategory','CategoryController@add')->name('AddCategory');
-	Route::get('EditCategory','CategoryController@edit')->name('EditCategory');
-	Route::get('DeleteCategory','CategoryController@delete')->name('DeleteCategory');
-	Route::post('Store','CategoryController@Store')->name('StoreCategory');
+	Route::get('category-list','CategoryController@index')->name('category-list');
+	Route::get('add-category','CategoryController@add')->name('add-category');
+	Route::get('edit-category','CategoryController@edit')->name('edit-category');
+	Route::get('delete-category','CategoryController@delete')->name('delete-category');
+	Route::post('store-category','CategoryController@Store')->name('store-category');
 
-	Route::get('UserList','UserController@index')->name('UserList');
-	Route::get('AddUser','UserController@add')->name('AddUser');
-	Route::get('EditUser','UserController@edit')->name('EditUser');
-	Route::get('DeleteUser','UserController@index')->name('DeleteUser');
+	Route::get('user-list','UserController@index')->name('user-list');
+	Route::get('add-user','UserController@add')->name('add-user');
+	Route::get('edit-user','UserController@edit')->name('edit-user');
+	Route::get('delete-user','UserController@index')->name('delete-user');
 
-	Route::get('NewsList','NewsController@index')->name('NewsList');
-	Route::get('AddNews','NewsController@add')->name('AddNews');
-	Route::get('EditNews','NewsController@edit')->name('EditNews');
-	Route::get('DeleteNews','NewsController@delete')->name('DeleteNews');
+	Route::get('news-list','NewsController@index')->name('news-list');
+	Route::get('add-news','NewsController@add')->name('add-news');
+	Route::get('edit-news','NewsController@edit')->name('edit-news');
+	Route::get('delete-news','NewsController@delete')->name('delete-news');
 });

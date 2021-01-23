@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 class NewsController extends Controller
 {
     public function index(){
-    	return view('Backend.News.NewsList');
+    	return view('Backend.News.news-list');
     }
     public function add(){
 
     }
-    public function Edit(){
+    public function edit(){
 
     }
-    public function Delete(){
+    public function delete(){
     	
     }
 }

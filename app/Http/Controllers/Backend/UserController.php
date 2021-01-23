@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-    	return view('Backend.Users.UserList');
+    	return view('Backend.Users.user-list');
     }
     public function add(){
 
     }
-    public function Edit(){
+    public function edit(){
 
     }
-    public function Delete(){
+    public function delete(){
     	
     }
 }

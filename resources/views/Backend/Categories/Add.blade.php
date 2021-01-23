@@ -11,11 +11,11 @@
             <div class="panel-heading">Add a new category</div>
             <div class="panel-body">
                 <div class="col-md-12">
-                    <form role="form" action="{{route('StoreCategory')}}" method="post">
+                    <form role="form" action="{{route('store-category')}}" method="post">
                         @csrf
                         <div class="form-group">
                             <label>Category name</label>
-                            <input class="form-control" type="text" required="" name="ten_dm">
+                            <input class="form-control" type="text" required="" name="name">
                         </div>																					
                         <button type="submit" class="btn btn-primary" name="submit">Add</button>
                         <button type="reset" class="btn btn-default">Reset</button>

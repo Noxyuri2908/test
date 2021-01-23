@@ -4,30 +4,38 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Categories;
+use App\Models\Category;
 use Str;
 
 class CategoryController extends Controller
 {
-    public function index(){
-        $Categories = Categories::all();
-    	return view('Backend.Categories.CategoryList',['Categories'=>$Categories]);
-    }
-    public function add() {
-        return view('Backend.Categories.Add');
-    }
-    public function store(Request $request){
-        $Categories = new Categories;
-        $Categories->name = $request->ten_dm;
-        $Categories->slug = Str::slug($request->ten_dm);
-        $Categories->save();
+    public function index()
+    {
+        $categories = Category::all();
 
-        return redirect()->route('CategoryList');
+    	return view('Backend.Categories.category_list',['categories' => $categories]);
     }
-    public function Edit(){
+
+    public function add()
+    {
+        return view('Backend.Categories.add');
+    }
+
+    public function store(Request $request)
+    {
+        $inputs = $request->all();
+        $inputs['slug'] = Str::slug($inputs['name']);
+        Category::create($inputs);
+
+        return redirect()->route('category-list');
+    }
+
+    public function edit()
+    {
 
     }
-    public function Delete(){
+
+    public function delete(){
     	
     }
 }
