@@ -15,7 +15,9 @@
     </head>
     <body>
     	@include('Backend.Layouts.header')
-    	@include('Backend.Layouts.RightBar')
+        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        @yield('content')
+        </div>
     </body>
     <script src="{{asset('Backends/js/jquery-1.11.1.min.js')}}"></script>
         <script src="{{asset('Backends/js/bootstrap.min.js')}}"></script>

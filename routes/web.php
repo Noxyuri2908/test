@@ -28,9 +28,11 @@ Route::prefix('backend')->namespace('Backend')->group(function(){
 	Route::get('add-user','UserController@add')->name('add-user');
 	Route::get('edit-user','UserController@edit')->name('edit-user');
 	Route::get('delete-user','UserController@index')->name('delete-user');
+	Route::post('store-user','UserController@store')->name('store-user');
 
 	Route::get('news-list','NewsController@index')->name('news-list');
 	Route::get('add-news','NewsController@add')->name('add-news');
 	Route::get('edit-news','NewsController@edit')->name('edit-news');
 	Route::get('delete-news','NewsController@delete')->name('delete-news');
+	Route::post('store-news','NewsController@store')->name('store-news');
 });

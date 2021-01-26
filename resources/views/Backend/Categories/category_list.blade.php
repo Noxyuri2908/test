@@ -1,3 +1,12 @@
+@extends('Backend.Layouts.index')
+
+@section('content')
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+        <li class="active"></li>
+    </ol>
+</div><!--/.row-->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Category Management</h1>
@@ -8,7 +17,7 @@
         <div class="panel panel-default">
 
             <div class="panel-body" style="position: relative;">
-                <a href="quantri.php?page_layout=themdm" class="btn btn-primary" style="margin: 10px 0 20px 0; position: absolute;">Add a new category</a>
+                <a href="{{ route('add-category') }}" class="btn btn-primary" style="margin: 10px 0 20px 0; position: absolute;">Add a new category</a>
                 <table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-sort-name="name" data-sort-order="desc">
                     <thead>
                         <tr>						        
@@ -41,3 +50,4 @@
         </div>
     </div>
 </div><!--/.row-->	
+@endsection
