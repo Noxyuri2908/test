@@ -38,9 +38,10 @@
 	                            <td data-checkbox="true">{{ $det->id }}</td>
 	                            <td data-checkbox="true"><a href="">{{ $det->title }}</a></td>	
                                 <td data-checkbox="true">{{ $det->slug }}</td>
+                                <td data-checkbox="true">{{ $det->image }}</td>
                                 <td data-checkbox="true"><a href="">{{ $det->view }}</a></td>
                                 <td data-checkbox="true">{{ $det->content }}</td>
-                                <td data-sortable="true">{{ $det->Descreption }}</td>
+                                <td data-sortable="true">{{ $det->descreption }}</td>
 	                            <td>
 	                                <a href="Backends/News/Edit"><span><svg class="glyph stroked brush" style="width: 20px;height: 20px;"><use xlink:href="#stroked-brush"/></svg></span></a>
 	                            </td>

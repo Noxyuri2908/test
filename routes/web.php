@@ -16,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('Backend/Layouts/index');
 });
+
+Route::get('get-login','Backend\UserController@getLogin')->name('get-login');
+Route::post('post-login','Backend\UserController@postLogin')->name('post-login');
+
 Route::prefix('backend')->namespace('Backend')->group(function(){
-	Route::get('/','DashboardController@index')->name('');
+	Route::get('/','DashboardController@index')->name('index');
 	Route::get('category-list','CategoryController@index')->name('category-list');
 	Route::get('add-category','CategoryController@add')->name('add-category');
 	Route::get('edit-category','CategoryController@edit')->name('edit-category');
@@ -35,4 +39,9 @@ Route::prefix('backend')->namespace('Backend')->group(function(){
 	Route::get('edit-news','NewsController@edit')->name('edit-news');
 	Route::get('delete-news','NewsController@delete')->name('delete-news');
 	Route::post('store-news','NewsController@store')->name('store-news');
+	// Route::get('login','UserController@getLogin')->name('get-login');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Str;
 
@@ -42,5 +43,27 @@ class UserController extends Controller
 
     public function delete(){
     	
+    }
+
+    public function getLogin()
+    {
+        return view('Backend.login');
+    }
+
+    public function postLogin(Request $request)
+    {
+        $inputs = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+
+        if (Auth::attempt($inputs)) {
+            return redirect()->route('index');
+
+        }
+
+        else {
+            return redirect()->route('get-login');
+        }
     }
 }
