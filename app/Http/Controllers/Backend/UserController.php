@@ -13,13 +13,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-    	return view('Backend.Users.user_list', ['users' => $users]);
+
+        return view('Backend.Users.user_list', ['users' => $users]);
     }
 
     public function add()
     {
         return view('Backend.Users.add');
-
     }
 
     public function store(Request $request)
@@ -34,15 +34,17 @@ class UserController extends Controller
         $inputs['email'] = Str::slug($inputs['email']);
         $inputs['password'] = Str::slug($inputs['password']);
         User::create($inputs);
+
         return redirect()->route('user-list');
     }
+
     public function edit()
     {
 
     }
 
     public function delete(){
-    	
+        
     }
 
     public function getLogin()
@@ -56,13 +58,10 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
-
         if (Auth::attempt($inputs)) {
             return redirect()->route('index');
 
-        }
-
-        else {
+        } else {
             return redirect()->route('get-login');
         }
     }

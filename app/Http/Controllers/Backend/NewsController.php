@@ -12,13 +12,13 @@ class NewsController extends Controller
     public function index()
     {
         $details = Detail::all();
+
     	return view('Backend.News.news_list', ['details' => $details]);
     }
 
     public function add()
     {
         return view('Backend.News.add');
-
     }
 
     public function store(Request $request)
@@ -28,7 +28,6 @@ class NewsController extends Controller
         $inputs['image'] = $inputs['slug'] . '.jpg';
         $inputs['user_id'] = 1;
         $this->saveImage($request->image, $inputs['image']);
-
         Detail::create($inputs);
 
         return redirect()->route('news-list');
@@ -43,6 +42,7 @@ class NewsController extends Controller
     public function edit(){
 
     }
+    
     public function delete(){
     	
     }
