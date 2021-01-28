@@ -30,12 +30,26 @@ class CategoryController extends Controller
         return redirect()->route('category-list');
     }
 
-    public function edit()
+    public function getEdit($id)
     {
+        $categories = Category::find($id);
 
+        return view('Backend.Categories.edit',['categories'=>$categories]);
     }
 
-    public function delete(){
-    	
+    public function postEdit(Request $request,$id)
+    {
+        $categories = Category::find($id);
+        $categories->name = $request->name;
+        $categories->save();
+
+        return redirect()->route('category-list');
+    }
+
+    public function delete($id){
+    	$categories = Category::find($id);
+        $categories->delete();
+
+        return redirect()->route('category-list');
     }
 }

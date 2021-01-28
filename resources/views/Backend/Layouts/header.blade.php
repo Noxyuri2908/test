@@ -14,7 +14,8 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>Information</a></li>
                         <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg>Setting</a></li>
-                        <li><a href=""><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>Log out</a></li>
+                        <li><a href="{{ route('get-logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>Log out</a></li>
+
                     </ul>
                 </li>
             </ul>
@@ -80,7 +81,7 @@
 
         </li>
         <li role="presentation" class="divider"></li>
-        <li><a href="dangxuat.php"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Log out</a></li>
+        <li><a href="{{ route('get-logout') }}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Log out</a></li>
     </ul>
 
 </div><!--/.sidebar-->

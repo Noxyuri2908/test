@@ -39,11 +39,32 @@ class NewsController extends Controller
     }
 
 
-    public function edit(){
+    public function getEdit($id)
+    {
+        $details = Detail::find($id);
 
+        return view('Backend.News.edit',['details' => $details]);
+    }
+
+    public function postEdit(Request $request, $id)
+    {
+        $details = Detail::find($id);
+        $details->title = $request->title;
+        $details->view = $request->view;
+        $details->content = $request->content;
+        $details->description = $request->description;
+        $details['image'] = $details['slug'] . '.jpg';
+        $details['user_id'] = 1;
+        $this->saveImage($request->image, $details['image']);
+        $details->save();
+
+        return redirect()->route('news-list');
     }
     
-    public function delete(){
-    	
+    public function delete($id){
+    	$details = Detail::find($id);
+        $details->delete();
+
+        return redirect()->route('news-list');
     }
 }

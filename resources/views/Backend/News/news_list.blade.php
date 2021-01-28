@@ -27,7 +27,7 @@
                             <th data-sortable="true">Image</th>
                             <th data-sortable="true">View</th>
                             <th data-sortable="true">Content</th>
-                            <th data-sortable="true">Descreption</th>
+                            <th data-sortable="true">Description</th>
                             <th data-sortable="true">Edit</th>
                             <th data-sortable="true">Delete</th>
                         </tr>
@@ -41,13 +41,13 @@
                                 <td data-checkbox="true">{{ $det->image }}</td>
                                 <td data-checkbox="true"><a href="">{{ $det->view }}</a></td>
                                 <td data-checkbox="true">{{ $det->content }}</td>
-                                <td data-sortable="true">{{ $det->descreption }}</td>
+                                <td data-sortable="true">{{ $det->description }}</td>
 	                            <td>
-	                                <a href="Backends/News/Edit"><span><svg class="glyph stroked brush" style="width: 20px;height: 20px;"><use xlink:href="#stroked-brush"/></svg></span></a>
+	                                <a href="{{ route('get-edit-news', ['id'=>$det->id])}}"><span><svg class="glyph stroked brush" style="width: 20px;height: 20px;"><use xlink:href="#stroked-brush"/></svg></span></a>
 	                            </td>
 
 	                            <td>
-	                                <a onclick="" href="Backends/Categories/Delete"><span><svg class="glyph stroked cancel" style="width: 20px;height: 20px;"><use xlink:href="#stroked-cancel"/></svg></span></a>
+	                                <a onclick="" href="{{ route('delete-news', ['id'=>$det->id])}}"><span><svg class="glyph stroked cancel" style="width: 20px;height: 20px;"><use xlink:href="#stroked-cancel"/></svg></span></a>
 	                            </td>
 	                        </tr>
                         @endforeach

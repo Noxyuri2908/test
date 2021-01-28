@@ -38,13 +38,30 @@ class UserController extends Controller
         return redirect()->route('user-list');
     }
 
-    public function edit()
+    public function getEdit($id)
     {
+        $users = User::find($id);
 
+        return view('Backend.Users.edit',['users' => $users]);
     }
 
-    public function delete(){
-        
+    public function postEdit(Request $request, $id)
+    {
+        $users = User::find($id);
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = $request->password;
+        $users-> save();
+
+        return redirect() -> route('user-list');
+    }
+
+    public function delete($id){
+        $users = User::find($id);
+        // $users->steps->delete();
+        $users->delete();
+
+        return redirect() -> route('user-list');
     }
 
     public function getLogin()
@@ -64,5 +81,11 @@ class UserController extends Controller
         } else {
             return redirect()->route('get-login');
         }
+    }
+
+    public function getLogout()
+    {
+        Auth::logout();
+        return view('Backend.login');
     }
 }

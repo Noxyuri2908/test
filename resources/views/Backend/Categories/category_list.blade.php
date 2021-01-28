@@ -33,11 +33,11 @@
 	                            <td data-checkbox="true">{{ $cate->id }}</td>
 	                            <td data-checkbox="true"><a href="">{{ $cate->name }}</a></td>						        
 	                            <td>
-	                                <a href="Backends/Categories/Edit/Categories/Edit"><span><svg class="glyph stroked brush" style="width: 20px;height: 20px;"><use xlink:href="#stroked-brush"/></svg></span></a>
+	                                <a href="{{route('get-edit-category', ['id' => $cate->id])}}"><span><svg class="glyph stroked brush" style="width: 20px;height: 20px;"><use xlink:href="#stroked-brush"/></svg></span></a>
 	                            </td>
 
 	                            <td>
-	                                <a onclick="" href="Backends/Categories/Delete"><span><svg class="glyph stroked cancel" style="width: 20px;height: 20px;"><use xlink:href="#stroked-cancel"/></svg></span></a>
+	                                <a onclick="" href="{{route('delete-category', ['id' => $cate->id])}}"><span><svg class="glyph stroked cancel" style="width: 20px;height: 20px;"><use xlink:href="#stroked-cancel"/></svg></span></a>
 	                            </td>
 	                        </tr>
                         @endforeach

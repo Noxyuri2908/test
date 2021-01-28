@@ -14,11 +14,11 @@ class CreateCategoryDetailsTable extends Migration
     public function up()
     {
         Schema::create('category_details', function (Blueprint $table) {
-             $table->id();
+            $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('detail_id');
-            $table->foreign('detail_id')->references('id')->on('details');
+            $table->foreign('detail_id')->references('id')->on('details')->onDelete('cascade');
             $table->timestamps();
         });
     }
