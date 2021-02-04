@@ -12,9 +12,9 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $detail = Detail::all();
+        $details = Detail::all();
 
-    	return view('Backend.News.news_list', ['details' => $detail]);
+    	return view('Backend.News.news_list', ['details' => $details]);
     }
 
     public function add()

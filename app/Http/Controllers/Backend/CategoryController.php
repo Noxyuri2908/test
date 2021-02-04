@@ -11,9 +11,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::all();
+        $categories = Category::all();
 
-    	return view('Backend.Categories.category_list',['categories' => $category]);
+    	return view('Backend.Categories.category_list',['categories' => $categories]);
     }
 
     public function add()
@@ -55,6 +55,6 @@ class CategoryController extends Controller
     	$category = Category::find($id);
         $category->delete();
 
-        return redirect()->route('category-list');
+        return redirect()->route('category-list')->with('success','completed!');
     }
 }

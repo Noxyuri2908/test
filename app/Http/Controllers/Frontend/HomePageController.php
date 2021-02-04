@@ -12,7 +12,7 @@ class HomePageController extends Controller
 	protected $categoryModel;
 	protected $detailModel;
 
-	public function _construct(Category $categoryModel, Detail $detailModel)
+	public function __construct(Category $categoryModel, Detail $detailModel)
 	{
 		$this->categoryModel = $categoryModel;
 		$this->detailModel = $detailModel;
@@ -20,8 +20,8 @@ class HomePageController extends Controller
 
     public function index()
     {
-    	$detail = Detail::all();
-    	$category = Category::all();
+    	$detail = $this->detailModel->all();
+    	$category = $this->categoryModel->all();
   
     	return view('Frontend.Contents.home', ['categories' => $category, 'detail' => $detail]);
     }
@@ -41,19 +41,19 @@ class HomePageController extends Controller
 
     public function store()
     {
-    	$detail = Detail::all();
-    	$category = Category::all();
+    	$detail = $this->detailModel->all();
+    	$category = $this->categoryModel->all();
 
     	return view('Frontend.Contents.detailNews',['categories' => $category, 'details' => $detail]);
     }
     
     public function getNews($id)
     {
-    	$category = Category::all();
-        $detail = Detail::find($id);
-    	$details = Detail::all();
+    	
+    	$categories = $this->categoryModel->all();
+        $detail = $this->detailModel->find($id);
+    	$details = $this->detailModel->all();
 
-
-        return view('Frontend.Contents.detailNews',['categories' => $category, 'detail' => $detail, 'details' => $details]);
+        return view('Frontend.Contents.detailNews',['categories' => $categories, 'detail' => $detail, 'details' => $details]);
     }
 }

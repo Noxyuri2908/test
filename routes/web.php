@@ -56,4 +56,7 @@ Route::namespace('Frontend')->group(function(){
 	Route::get('index', 'HomePageController@index')->name('index');
 	Route::get('detail-news', 'HomePageController@store')->name('detail-news');
 	Route::get('get-detail-news/{id}', 'HomePageController@getNews')->name('get-detail-news');
+	Route::get('comment/{id}', 'CommentController@index')->name('comment-list');
+	Route::get('get-comment/{id}', 'CommentController@getComment')->name('get-comment');
+	Route::get('post-comment/{id}', 'CommentController@postComment')->name('post-comment');
 });
