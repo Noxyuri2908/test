@@ -21,8 +21,8 @@ class CreateDetailsTable extends Migration
             $table->string('view');
             $table->text('description', 1000);
             $table->longText('content');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->constrained('users');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

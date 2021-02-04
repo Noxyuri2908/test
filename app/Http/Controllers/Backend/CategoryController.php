@@ -11,9 +11,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $category = Category::all();
 
-    	return view('Backend.Categories.category_list',['categories' => $categories]);
+    	return view('Backend.Categories.category_list',['categories' => $category]);
     }
 
     public function add()
@@ -32,23 +32,28 @@ class CategoryController extends Controller
 
     public function getEdit($id)
     {
-        $categories = Category::find($id);
+        $category = Category::find($id);
 
-        return view('Backend.Categories.edit',['categories'=>$categories]);
+        return view('Backend.Categories.edit',['categories'=>$category]);
     }
 
     public function postEdit(Request $request,$id)
     {
-        $categories = Category::find($id);
-        $categories->name = $request->name;
-        $categories->save();
+        $category = Category::find($id);
+        Category::where('id', $id)->update(
+            [
+            'name' => $request->name,
+            'status' => $request->status
+            ]
+        );
+        // $category->save();
 
         return redirect()->route('category-list');
     }
 
     public function delete($id){
-    	$categories = Category::find($id);
-        $categories->delete();
+    	$category = Category::find($id);
+        $category->delete();
 
         return redirect()->route('category-list');
     }

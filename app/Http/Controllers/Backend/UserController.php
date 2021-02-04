@@ -12,9 +12,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $user = User::all();
 
-        return view('Backend.Users.user_list', ['users' => $users]);
+        return view('Backend.Users.user_list', ['users' => $user]);
     }
 
     public function add()
@@ -24,11 +24,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // $inputs = new User();
-        // $inputs->name = $request->name;
-        // $inputs->email = $request->email;
-        // $inputs->password = $request->password;
-        // $inputs->save();
         $inputs = $request->all();
         $inputs['name'] = Str::slug($inputs['name']);
         $inputs['email'] = Str::slug($inputs['email']);
@@ -40,26 +35,28 @@ class UserController extends Controller
 
     public function getEdit($id)
     {
-        $users = User::find($id);
+        $user = User::find($id);
 
-        return view('Backend.Users.edit',['users' => $users]);
+        return view('Backend.Users.edit',['users' => $user]);
     }
 
     public function postEdit(Request $request, $id)
     {
-        $users = User::find($id);
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $users-> save();
+        $user = User::find($id);
+        User::where('id', $id)->update(
+            [
+                'name'=> $request->name,
+                'email' => $request->email,
+                'password' => $request->password
+            ]
+        );
 
         return redirect() -> route('user-list');
     }
 
     public function delete($id){
-        $users = User::find($id);
-        // $users->steps->delete();
-        $users->delete();
+        $user = User::find($id);
+        $user->delete();
 
         return redirect() -> route('user-list');
     }
@@ -86,6 +83,7 @@ class UserController extends Controller
     public function getLogout()
     {
         Auth::logout();
+
         return view('Backend.login');
     }
 }

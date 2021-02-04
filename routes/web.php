@@ -22,7 +22,6 @@ Route::get('get-logout','Backend\UserController@getLogout')->name('get-logout');
 Route::post('post-login','Backend\UserController@postLogin')->name('post-login');
 
 Route::prefix('backend')->namespace('Backend')->middleware('auth')->group(function(){
-	Route::get('/','DashboardController@index')->name('index');
 	Route::get('category-list','CategoryController@index')->name('category-list');
 	Route::get('add-category','CategoryController@add')->name('add-category');
 	Route::get('get-edit-category/{id}','CategoryController@getEdit')->name('get-edit-category');
@@ -52,3 +51,9 @@ Route::prefix('backend')->namespace('Backend')->middleware('auth')->group(functi
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::namespace('Frontend')->group(function(){
+	Route::get('index', 'HomePageController@index')->name('index');
+	Route::get('detail-news', 'HomePageController@store')->name('detail-news');
+	Route::get('get-detail-news/{id}', 'HomePageController@getNews')->name('get-detail-news');
+});

@@ -23,6 +23,7 @@
                         <tr>						        
                             <th data-sortable="true">ID</th>
                             <th data-sortable="true">Name</th>
+                            <th data-sortable="true">Status(1=active,0=inactive)</th>
                             <th data-sortable="true">Edit</th>
                             <th data-sortable="true">Delete</th>
                         </tr>
@@ -31,7 +32,8 @@
                     	@foreach($categories as $cate)
 	                        <tr>
 	                            <td data-checkbox="true">{{ $cate->id }}</td>
-	                            <td data-checkbox="true"><a href="">{{ $cate->name }}</a></td>						        
+                                <td data-checkbox="true">{{ $cate->name }}</a></td>
+	                            <td data-checkbox="true">{{ $cate->status }}</a></td>
 	                            <td>
 	                                <a href="{{route('get-edit-category', ['id' => $cate->id])}}"><span><svg class="glyph stroked brush" style="width: 20px;height: 20px;"><use xlink:href="#stroked-brush"/></svg></span></a>
 	                            </td>

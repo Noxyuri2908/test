@@ -5,20 +5,23 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Detail;
+use App\Models\Category;
 use Str;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $details = Detail::all();
+        $detail = Detail::all();
 
-    	return view('Backend.News.news_list', ['details' => $details]);
+    	return view('Backend.News.news_list', ['details' => $detail]);
     }
 
     public function add()
     {
-        return view('Backend.News.add');
+        $categories = Category::all();
+
+        return view('Backend.News.add',['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -26,7 +29,6 @@ class NewsController extends Controller
         $inputs = $request->all();
         $inputs['slug'] = Str::slug($inputs['title']);
         $inputs['image'] = $inputs['slug'] . '.jpg';
-        $inputs['user_id'] = 1;
         $this->saveImage($request->image, $inputs['image']);
         Detail::create($inputs);
 
@@ -41,29 +43,33 @@ class NewsController extends Controller
 
     public function getEdit($id)
     {
-        $details = Detail::find($id);
+        $detail = Detail::find($id);
+        $categories = Category::all();
 
-        return view('Backend.News.edit',['details' => $details]);
+        return view('Backend.News.edit',['details' => $detail, 'categories' => $categories]);
     }
 
     public function postEdit(Request $request, $id)
     {
-        $details = Detail::find($id);
-        $details->title = $request->title;
-        $details->view = $request->view;
-        $details->content = $request->content;
-        $details->description = $request->description;
-        $details['image'] = $details['slug'] . '.jpg';
-        $details['user_id'] = 1;
-        $this->saveImage($request->image, $details['image']);
-        $details->save();
+        $detail = Detail::find($id);
+        Detail::where('id', $id)->update(
+            [
+                'title' => $request->title,
+                'view' => $request->view,
+                'content' => $request->content,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'image' => $detail->slug . '.jpg'
+            ]
+        );
+        $this->saveImage($request->image, $detail['image']);
 
         return redirect()->route('news-list');
     }
     
     public function delete($id){
-    	$details = Detail::find($id);
-        $details->delete();
+    	$detail = Detail::find($id);
+        $detail->delete();
 
         return redirect()->route('news-list');
     }

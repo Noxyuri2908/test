@@ -28,6 +28,7 @@
                             <th data-sortable="true">View</th>
                             <th data-sortable="true">Content</th>
                             <th data-sortable="true">Description</th>
+                            <th data-sortable="true">Category_id</th>
                             <th data-sortable="true">Edit</th>
                             <th data-sortable="true">Delete</th>
                         </tr>
@@ -42,6 +43,7 @@
                                 <td data-checkbox="true"><a href="">{{ $det->view }}</a></td>
                                 <td data-checkbox="true">{{ $det->content }}</td>
                                 <td data-sortable="true">{{ $det->description }}</td>
+                                <td data-checkbox="true">{{ $det->category_id }}</td>
 	                            <td>
 	                                <a href="{{ route('get-edit-news', ['id'=>$det->id])}}"><span><svg class="glyph stroked brush" style="width: 20px;height: 20px;"><use xlink:href="#stroked-brush"/></svg></span></a>
 	                            </td>

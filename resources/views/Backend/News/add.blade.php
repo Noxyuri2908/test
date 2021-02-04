@@ -27,10 +27,6 @@
                             <label>title</label>
                             <input type="text" class="form-control"  name="title" required="">
                         </div>
-                        <div class="form-group">
-                            <label>content</label>
-                            <input type="text" class="form-control" name="content" required="">
-                        </div>
 
                         <div class="form-group">
                             <label>view</label>
@@ -41,6 +37,25 @@
                             <label>description</label>
                             <input type="text" class="form-control" name="description" required="">
                         </div>
+                        
+                        <div class="form-group">
+                            <label>content</label>
+                            <textarea class="form-control" rows="3" name="content"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Categories</label>
+                            <select name="category_id" class="form-control">
+                                <option value="unselect" selected>Checking category</option>
+                                @foreach($categories as $cate)
+                                <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <script type="text/javascript">
+                                CKEDITOR.replace('content');
+                        </script>
 
                         <div class="form-group">
                             <label>image</label>
