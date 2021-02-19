@@ -12,7 +12,7 @@
                   <img src='{{asset("uploads/news/details/$detail->image")}}' width="700px" height="340px" alt="">
                 </div>
                 <div class="down-content">
-                  <span>Lifestyle</span>
+                  <span><h12>{{ $detail->category->name }}</h12></span>
                   <a href="{{route('get-detail-news', ['id' => $detail->id])}}"><h4>{{ $detail->title }}</h4></a>
                   <ul class="post-info">
                     <li><a href="#">Admin</a></li>
@@ -24,9 +24,10 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <ul class="post-tags">
+                          @foreach($tagsDetail as $td)
                           <li><i class="fa fa-tags"></i></li>
-                          <li><a href="#">creative</a>,</li>
-                          <li><a href="#">ideas</a></li>
+                          <li><a>{{ $td->name }}</a>____</li>
+                          @endforeach
                         </ul>
                       </div>
                     </div>
@@ -48,8 +49,8 @@
                 </div>
                 <div class="content">
                   <ul>
-                    @foreach($details as $news)
-                    <li><a href="">
+                    @foreach($relatedDetail as $news)
+                    <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">
                       <h5>{{ $news->title }}</h5>
                       <span>{{ $news->updated_at }}</span>
                     </a></li>
@@ -64,4 +65,27 @@
       </div>
   </div>
 </section>
+@endsection
+
+@section('js')
+<script>
+ $(document).ready(function() {
+      $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+            }
+        });
+      $('.main-button').click(function() {
+          $.ajax({
+              url: "{{route('post-comment')}}",
+              type: 'POST',
+              dataType: 'html',
+              data: $('#contact').serialize(),
+          }).done(function(ketqua) {
+              alert(ketqua);
+          });
+          
+      });
+  });
+</script>
 @endsection

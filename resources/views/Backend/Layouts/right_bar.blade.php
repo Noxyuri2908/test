@@ -1,4 +1,3 @@
-
 @section('content')
 
 <div class="row">
@@ -22,8 +21,8 @@
                     <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
                 </div>
                 <div class="col-sm-9 col-lg-7 widget-right">
-                    <div class="large">120</div>
-                    <div class="text-muted">Order</div>
+                    <div class="large">509</div>
+                    <div class="text-muted">Posts</div>
                 </div>
             </div>
         </div>
@@ -35,8 +34,8 @@
                     <svg class="glyph stroked empty-message"><use xlink:href="#stroked-empty-message"></use></svg>
                 </div>
                 <div class="col-sm-9 col-lg-7 widget-right">
-                    <div class="large">52</div>
-                    <div class="text-muted">Comment</div>
+                    <div class="large">352</div>
+                    <div class="text-muted">Comments</div>
                 </div>
             </div>
         </div>
@@ -49,7 +48,7 @@
                 </div>
                 <div class="col-sm-9 col-lg-7 widget-right">
                     <div class="large">24</div>
-                    <div class="text-muted">Member</div>
+                    <div class="text-muted">Members</div>
                 </div>
             </div>
         </div>
@@ -61,8 +60,8 @@
                     <svg class="glyph stroked app-window-with-content"><use xlink:href="#stroked-app-window-with-content"></use></svg>
                 </div>
                 <div class="col-sm-9 col-lg-7 widget-right">
-                    <div class="large">25.2k</div>
-                    <div class="text-muted">View</div>
+                    <div class="large">295.2k</div>
+                    <div class="text-muted">Views</div>
                 </div>
             </div>
         </div>

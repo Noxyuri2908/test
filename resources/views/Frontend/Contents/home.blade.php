@@ -14,22 +14,17 @@
                   <img src='{{asset("uploads/news/details/$news->image")}}' width="700px" height="340px" alt="">
                 </div>
                 <div class="down-content">
-                  <span>Lifestyle</span>
                   <a href="{{route('get-detail-news', ['id' => $news->id])}}"><h4>{{ $news->title }}</h4></a>
                   <ul class="post-info">
-                    <li><a href="#">Admin</a></li>
-                    <li><a href="#">{{ $news->updated_at }}</a></li>
-                    <li><a href="#">{{ $news->view }} Views</a></li>
+                    <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">Admin</a></li>
+                    <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">{{ $news->updated_at }}</a></li>
+                    <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">{{ $news->view }} Views</a></li>
                   </ul>
-                  <p>{{ $news->description }}</p>
+                  <p>{{ $news->description }}<a href="{{route('get-detail-news', ['id' => $news->id])}}">...read more</a></p>
                   <div class="post-options">
                     <div class="row">
                       <div class="col-lg-12">
-                        <ul class="post-tags">
-                          <li><i class="fa fa-tags"></i></li>
-                          <li><a href="#">creative</a>,</li>
-                          <li><a href="#">ideas</a></li>
-                        </ul>
+                        <span><h6>#{{ $news->category->name }}</h6></span>
                       </div>
                     </div>
                   </div>
@@ -58,8 +53,8 @@
                 </div>
                 <div class="content">
                   <ul>
-                    @foreach($detail as $news)
-                    <li><a href="">
+                    @foreach($lastestDetail as $news)
+                    <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">
                       <h5>{{ $news->title }}</h5>
                       <span>{{ $news->updated_at }}</span>
                     </a></li>

@@ -5,23 +5,37 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Detail;
+use App\Models\Tag;
+use App\Models\TagDetail;
 use App\Models\Category;
 use Str;
 
 class NewsController extends Controller
 {
+    protected $categoryModel;
+    protected $detailModel;
+    protected $tagModel;
+
+    public function __construct(Category $categoryModel, Detail $detailModel, Tag $tagModel)
+    {
+        $this->categoryModel = $categoryModel;
+        $this->detailModel = $detailModel;
+        $this->tagModel = $tagModel;
+    }
+
     public function index()
     {
-        $details = Detail::all();
+        $details = $this->detailModel->all();
 
     	return view('Backend.News.news_list', ['details' => $details]);
     }
 
     public function add()
     {
-        $categories = Category::all();
+        $categories = $this->categoryModel->all();
+        $tags = $this->tagModel->all();
 
-        return view('Backend.News.add',['categories' => $categories]);
+        return view('Backend.News.add', ['categories' => $categories, 'tags' => $tags]);
     }
 
     public function store(Request $request)
@@ -31,7 +45,7 @@ class NewsController extends Controller
         $inputs['image'] = $inputs['slug'] . '.jpg';
         $this->saveImage($request->image, $inputs['image']);
         Detail::create($inputs);
-
+        
         return redirect()->route('news-list');
     }
     
@@ -43,16 +57,16 @@ class NewsController extends Controller
 
     public function getEdit($id)
     {
-        $detail = Detail::find($id);
-        $categories = Category::all();
+        $detail = $this->detailModel->find($id);
+        $categories = $this->categoryModel->all();
 
-        return view('Backend.News.edit',['details' => $detail, 'categories' => $categories]);
+        return view('Backend.News.edit', ['details' => $detail, 'categories' => $categories]);
     }
 
     public function postEdit(Request $request, $id)
     {
-        $detail = Detail::find($id);
-        Detail::where('id', $id)->update(
+        $detail = $this->detailModel->find($id);
+        $this->detailModel->where('id', $id)->update(
             [
                 'title' => $request->title,
                 'view' => $request->view,
@@ -68,9 +82,9 @@ class NewsController extends Controller
     }
     
     public function delete($id){
-    	$detail = Detail::find($id);
+    	$detail = $this->detailModel->find($id);
         $detail->delete();
 
-        return redirect()->route('news-list');
+        return redirect()->route('news-list')->with('success', 'completed!');
     }
 }

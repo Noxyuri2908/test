@@ -34,17 +34,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
             </li>
+            @foreach($categories as $cate)
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('detail-news') }}">Events</a>
+              <a class="nav-link" href="">{{ $cate->name }}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About us</a>
-            </li>
+            @endforeach
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-sort-name="name" data-sort-order="desc">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
@@ -126,6 +125,6 @@
         }
     }
   </script>
-
+  @yield('js')
   
 </html>

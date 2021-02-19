@@ -9,6 +9,11 @@ class Comment extends Model
     protected $table='comments';
 
     protected $fillable = [
-        'name', 'description', 'slug'
+        'name', 'detail_id', 'description', 'slug'
     ];
+
+    public function detail()
+	{
+    	return $this->hasMany('App\Models\Detail');
+	}
 }

@@ -73,7 +73,7 @@ class UserController extends Controller
             'password' => $request->password
         ];
         if (Auth::attempt($inputs)) {
-            return redirect()->route('index');
+            return redirect()->route('/');
 
         } else {
             return redirect()->route('get-login');
@@ -84,6 +84,6 @@ class UserController extends Controller
     {
         Auth::logout();
 
-        return view('Backend.login');
+        return view('auth.login');
     }
 }

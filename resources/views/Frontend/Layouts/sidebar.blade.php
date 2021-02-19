@@ -5,7 +5,7 @@
         <div class="content">
           @foreach($categories as $cate)
           <ul>
-            <li style="line-height: 2;"><a href="#">- {{ $cate->name }}</a></li>
+            <li style="line-height: 2;"><a href="#"># {{ $cate->name }}</a></li>
           </ul>
           @endforeach
         </div>
@@ -18,12 +18,9 @@
       <h2>Tag Clouds</h2>
         <div class="content">
           <ul>
-            <li><a href="#">Awesome </a></li>
-            <li><a href="#">Creative </a></li>
-            <li><a href="#">Ideas</a></li>
-            <li><a href="#">Creative</a></li>
-            <li><a href="#">Ideas</a></li>
-          </ul>
+            @foreach($tags as $tg)
+            <li><a href="#">{{ $tg->name }}</a></li>
+            @endforeach
         </div>
     </div>
   </div>

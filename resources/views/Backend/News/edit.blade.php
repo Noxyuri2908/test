@@ -1,6 +1,7 @@
 @extends('Backend.Layouts.index')
 
 @section('content')
+</script>
 <div class="row">
     <ol class="breadcrumb">
         <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
@@ -23,7 +24,7 @@
                 <form method="post" action="{{route('post-edit-news', ['id' => $details->id])}}" enctype="multipart/form-data" role="form">
                     @csrf
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group" class="">
                             <label>title</label>
                             <input type="text" class="form-control"  name="title" value="{{ $details->title}}" required="">
                         </div>

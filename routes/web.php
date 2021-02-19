@@ -30,6 +30,14 @@ Route::prefix('backend')->namespace('Backend')->middleware('auth')->group(functi
 	Route::post('store-category','CategoryController@Store')->name('store-category');
 
 
+	Route::get('tag-list', 'TagController@index')->name('tag-list');
+	Route::get('add-tag','TagController@add')->name('add-tag');
+	Route::get('get-edit-tag/{id}','TagController@getEdit')->name('get-edit-tag');
+	Route::post('post-edit-tag/{id}','TagController@postEdit')->name('post-edit-tag');
+	Route::get('delete-tag/{id}','TagController@delete')->name('delete-tag');
+	Route::post('store-tag','TagController@Store')->name('store-tag');
+
+
 	Route::get('user-list','UserController@index')->name('user-list');
 	Route::get('add-user','UserController@add')->name('add-user');
 	Route::get('edit-user','UserController@edit')->name('edit-user');
@@ -56,7 +64,8 @@ Route::namespace('Frontend')->group(function(){
 	Route::get('index', 'HomePageController@index')->name('index');
 	Route::get('detail-news', 'HomePageController@store')->name('detail-news');
 	Route::get('get-detail-news/{id}', 'HomePageController@getNews')->name('get-detail-news');
-	Route::get('comment/{id}', 'CommentController@index')->name('comment-list');
+	Route::get('comments-list', 'CommentController@index')->name('comments-list');
+	Route::get('delete-comment/{id}','CommentController@delete')->name('delete-comment');
 	Route::get('get-comment/{id}', 'CommentController@getComment')->name('get-comment');
-	Route::get('post-comment/{id}', 'CommentController@postComment')->name('post-comment');
+	Route::post('post-comment', 'CommentController@postComment')->name('post-comment');
 });

@@ -4,14 +4,24 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Detail;
 use App\Models\Category;
 use Str;
 
 class CategoryController extends Controller
 {
+    protected $categoryModel;
+    protected $detailModel;
+
+    public function __construct(Category $categoryModel, Detail $detailModel)
+    {
+        $this->categoryModel = $categoryModel;
+        $this->detailModel = $detailModel;
+    }
+
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->categoryModel->all();
 
     	return view('Backend.Categories.category_list',['categories' => $categories]);
     }
@@ -25,21 +35,21 @@ class CategoryController extends Controller
     {
         $inputs = $request->all();
         $inputs['slug'] = Str::slug($inputs['name']);
-        Category::create($inputs);
+        $this->categoryModel->create($inputs);
 
         return redirect()->route('category-list');
     }
 
     public function getEdit($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryModel->find($id);
 
-        return view('Backend.Categories.edit',['categories'=>$category]);
+        return view('Backend.Categories.edit', ['categories'=>$category]);
     }
 
     public function postEdit(Request $request,$id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryModel->find($id);
         Category::where('id', $id)->update(
             [
             'name' => $request->name,
@@ -52,9 +62,9 @@ class CategoryController extends Controller
     }
 
     public function delete($id){
-    	$category = Category::find($id);
+    	$category = $this->categoryModel->find($id);
         $category->delete();
 
-        return redirect()->route('category-list')->with('success','completed!');
+        return redirect()->route('category-list')->with('success', 'completed!');
     }
 }

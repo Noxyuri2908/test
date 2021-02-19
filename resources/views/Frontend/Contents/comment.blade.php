@@ -33,7 +33,8 @@
       <h2>Your comment</h2>
     </div>
     <div class="content">
-      <form id="comment" action="#" method="post">
+        <form id="contact" action="{{route('post-comment',['id' => $detail->id])}}" method="post">
+        	@csrf
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <fieldset>
@@ -42,12 +43,12 @@
           </div>
           <div class="col-lg-12">
             <fieldset>
-              <textarea name="description" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+              <textarea name="message" rows="6" id="message" placeholder="Your Message" required=""></textarea>
             </fieldset>
           </div>
           <div class="col-lg-12">
             <fieldset>
-              <button type="submit" id="form-submit" class="main-button">Submit</button>
+              <button type="submit" id="form-submit" class="main-button">Send Message</button>
             </fieldset>
           </div>
         </div>

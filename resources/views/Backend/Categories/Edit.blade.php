@@ -32,7 +32,7 @@
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="status"
-                                     id="optionsRadios1" value=1>active
+                                     id="optionsRadios1" value=1 checked="checked">active
                                 </label>
                             </div>
                             <div class="radio">
