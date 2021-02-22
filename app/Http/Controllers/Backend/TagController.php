@@ -49,12 +49,14 @@ class TagController extends Controller
         return view('Backend.Tags.edit', ['tags'=>$tag, 'details'=>$details]);
     }
 
-    public function postEdit(Request $request,$id)
+    public function postEdit(Request $request, $id)
     {
+        
         $tag = $this->tagModel->find($id);
         Tag::where('id', $id)->update(
             [
             'name' => $request->name,
+            'slug' => 'comment',
             'detail_id' => $request->detail_id
             ]
         );

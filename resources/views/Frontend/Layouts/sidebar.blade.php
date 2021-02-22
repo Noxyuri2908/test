@@ -5,7 +5,7 @@
         <div class="content">
           @foreach($categories as $cate)
           <ul>
-            <li style="line-height: 2;"><a href="#"># {{ $cate->name }}</a></li>
+            <li style="line-height: 2;"><a href=""><i class="fa fa-tasks"></i>  {{ $cate->name }}</a></li>
           </ul>
           @endforeach
         </div>

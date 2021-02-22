@@ -6,13 +6,12 @@
     <div class="row">
       <div class="col-lg-8">
         <div class="all-blog-posts">
-          <div class="row" style="display: flex;">
-            @foreach($detail as $news)
+          <div class="row">
             <div class="col-lg-6">
-
-              <div class="blog-post">
+              @foreach($detail as $news)
+              <div class="blog-post" style="width: 700px;">
                 <div class="blog-thumb">
-                  <img src='{{asset("uploads/news/details/$news->image")}}' height="340px" alt="">
+                  <img src='{{asset("uploads/news/details/$news->image")}}' width="700px" height="340px" alt="">
                 </div>
                 <div class="down-content">
                   <a href="{{route('get-detail-news', ['id' => $news->id])}}"><h4>{{ $news->title }}</h4></a>
@@ -31,8 +30,8 @@
                   </div>
                 </div>
               </div>
+              @endforeach
             </div>
-            @endforeach
             <div class="col-lg-12">
               <ul class="page-numbers">
                 <li><a href="#">1</a></li>

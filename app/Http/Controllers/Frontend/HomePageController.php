@@ -7,19 +7,21 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Detail;
 use App\Models\Tag;
-use App\Models\TagDetail;
+use App\Models\Comment;
 
 class HomePageController extends Controller
 {
 	protected $categoryModel;
     protected $detailModel;
     protected $tagModel;
+    protected $commentModel;
 
-	public function __construct(Category $categoryModel, Detail $detailModel, Tag $tagModel)
+	public function __construct(Category $categoryModel, Detail $detailModel, Tag $tagModel, Comment $commentModel)
 	{
 		$this->categoryModel = $categoryModel;
         $this->detailModel = $detailModel;
         $this->tagModel = $tagModel;
+        $this->commentModel = $commentModel;
 	}
 
     public function index()
@@ -28,6 +30,7 @@ class HomePageController extends Controller
     	$lastestDetail = $this->detailModel->orderBy('created_at', 'desc')->get()->take(4);
         $categories = $this->categoryModel->all();
     	$tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(15);
+        
         $data = [
             'categories' => $categories, 
             'detail' => $detail, 
@@ -64,22 +67,39 @@ class HomePageController extends Controller
     {
     	$categories = $this->categoryModel->all();
         $detail = $this->detailModel->find($id);
-        $tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(15);
     	$details = $this->detailModel->all();
         $relatedDetail = $this->detailModel->where('category_id', '=', $detail->category->id)
             ->where('id', '!=', $detail->id)
             ->orderBy('created_at', 'desc')->get()->take(4);
-        $tag = $this->tagModel->find($id);
+        $tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(15);
         $tagsDetail = $this->tagModel->where('detail_id', '=', $detail->id )->get();
+        $commentsDetail = $this->commentModel->where('detail_id', '=', $detail->id )->get();
     	$data = [
     		'categories' => $categories, 
             'detail' => $detail, 
     		'relatedDetail' => $relatedDetail, 
             'details' => $details,
-    		'tagsDetail' => $tagsDetail,
+            'tagsDetail' => $tagsDetail,
+    		'commentsDetail' => $commentsDetail,
             'tags' => $tags
     	];
 
         return view('Frontend.Contents.detailNews',$data);
     }
+
+    public function postComment(Request $request)
+    {
+        $detail = Detail::find($request->get('detail_id'));
+        Comment::create(
+            [
+            'name' => $request->name,
+            'slug' => 1,
+            'description' => $request->comment,
+            'detail_id' => $detail->id
+            ]
+        );
+
+        return redirect()->route('get-detail-news', ['id' => $detail->id]);
+    } 
+
 }

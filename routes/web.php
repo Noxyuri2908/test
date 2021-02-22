@@ -54,6 +54,9 @@ Route::prefix('backend')->namespace('Backend')->middleware('auth')->group(functi
 	Route::post('store-news','NewsController@store')->name('store-news');
 	Route::get('get-edit-news/{id}','NewsController@getEdit')->name('get-edit-news');
 	Route::post('post-edit-news/{id}','NewsController@postEdit')->name('post-edit-news');
+
+	Route::get('comments-list', 'CommentController@index')->name('comments-list');
+	Route::get('delete-comment/{id}','CommentController@delete')->name('delete-comment');
 });
 
 Auth::routes();
@@ -64,8 +67,6 @@ Route::namespace('Frontend')->group(function(){
 	Route::get('index', 'HomePageController@index')->name('index');
 	Route::get('detail-news', 'HomePageController@store')->name('detail-news');
 	Route::get('get-detail-news/{id}', 'HomePageController@getNews')->name('get-detail-news');
-	Route::get('comments-list', 'CommentController@index')->name('comments-list');
-	Route::get('delete-comment/{id}','CommentController@delete')->name('delete-comment');
-	Route::get('get-comment/{id}', 'CommentController@getComment')->name('get-comment');
-	Route::post('post-comment', 'CommentController@postComment')->name('post-comment');
+
+	Route::post('post-comment', 'HomePageController@postComment')->name('post-comment');
 });
