@@ -53,7 +53,7 @@ class TagController extends Controller
     {
         
         $tag = $this->tagModel->find($id);
-        Tag::where('id', $id)->update(
+        $this->tagModel->where('id', $id)->update(
             [
             'name' => $request->name,
             'slug' => 'comment',

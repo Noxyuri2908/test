@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="T">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
-
     <title>newsHome</title>
-    <base href="{{asset('/')}}">
-
-    <!-- Bootstrap core CSS -->
     <link href="{{asset('Frontends/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
-
-    <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{{asset('Frontends/assets/css/fontawesome.css')}}">
     <link rel="stylesheet" href="{{asset('Frontends/assets/css/default.css')}}">
     <link rel="stylesheet" href="{{asset('Frontends/assets/css/owl.css')}}">
@@ -24,30 +15,34 @@
 
   <!-- header -->
   <header class="">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="#"><h2>Truthful News<em>.</em></h2></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{{route('index')}}">Home 1 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{{route('index')}}">Home 1 <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('index')}}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
             </li>
             @foreach($categories as $cate)
             <li class="nav-item">
-              <a class="nav-link" href="">{{ $cate->name }}</a>
+              <a class="nav-link" href="{{route('get-details-category', ['id' => $cate->id])}}">{{ $cate->name }}</a>
             </li>
             @endforeach
           </ul>
         </div>
+        <div class="sidebar-item search">
+          <form class="dropdown" id="search_form" name="term" method="GET" action="{{ route('search') }}">
+            <input name="search" onclick="Function()" class="dropbtn" type="text" id="myInput" onkeyup="myFunction()" placeholder="type to search..." autocomplete="on">    
+          </form> 
+          <ul class="dropdown-content" id="myUL">
+            @foreach($details as $dt)
+            <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">{{ $dt->title }}</a></li>
+            @endforeach
+          </ul>  
+        </div>
+          <i style="padding-left: 60px" class="fa fa-search" aria-hidden="true"></i>  
       </div>
-    </nav>  
+    </nav>
   </header>
 
   <!-- body -->
@@ -59,14 +54,12 @@
   <footer>
     <div class="container-fluid pb-0 mb-0 justify-content-center text-light ">
          <div class="row my-5 justify-content-center py-5">
-             <div class="col-11">
-                 <div class="row ">
-                     <div class="col-xl-2 col-md-4 col-sm-4 col-12 my-auto mx-auto a">
-                     </div>
-                     <div class="col-xl-4 col-md-4 col-sm-4 col-12 my-auto mx-auto a">
+             <div class="col-lg-12" style="padding-bottom: -200px;">
+                 <div class="row col-lg-12" style="text-align: center;">
+                     <div class="col-lg-4">
                          <h3 class="text-muted mb-md-0 mb-5 bold-text">BkitSoftware.</h3>
                      </div>
-                     <div class="col-xl-3 col-md-4 col-sm-4 col-12">
+                     <div class="col-lg-4">
                          <h6 class="mb-3 mb-lg-4 bold-text "><b>MENU</b></h6>
                          <ul class="list-unstyled">
                              <li>Home</li>
@@ -75,34 +68,85 @@
                              <li>Portfolio</li>
                          </ul>
                      </div>
-                     <div class="col-xl-3 col-md-4 col-sm-4 col-12">
-                         <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>ADDRESS</b></h6>
-                         <p class="mb-1">488, BackMai</p>
-                         <p>Newspaper vector</p>
+                     <div class="col-lg-4">
+                         <h6 class="mb-3 mb-lg-4 bold-text "><b>ADDRESS</b></h6>
+                         <ul class="list-unstyled">
+                             <li>BkitSoftware</li>
+                             <li>488, Bach Mai street</li>
+                             <li>Ha Noi, Viet Nam</li>
+                         </ul>
                      </div>
                  </div>
-                 <div class="row ">
-                     <div class="col-xl-2 col-md-4 col-sm-4 col-12 my-auto mx-auto a">
+                 <div class="row col-lg-12" style="text-align: center;">
+                     <div class="col-lg-4">
+                      <p style="padding-left: 160px;" class="social text-muted mb-0 pb-0 bold-text"><span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span> </p><small class="rights"><span>&#174;
+                      </span> Bkit Software All Rights Reserved.</small>
                      </div>
-                     <div class="col-xl-4 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
-                         <p class="social text-muted mb-0 pb-0 bold-text"> <span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span> </p><small class="rights"><span>&#174;</span> Bkit Software All Rights Reserved.</small>
+                     <div class="col-lg-4">
+                      <h6 class="mt-55 mt-2 text-muted bold-text"><b>Company Email</b></h6><small> <span><i class="fa fa-envelope" aria-hidden="true"></i></span> BkitSoftware@gmail.com</small>  
                      </div>
-                     <div class="col-xl-3 col-md-4 col-sm-4 col-auto order-1 align-self-end ">
-                         <h6 class="mt-55 mt-2 text-muted bold-text"><b>Company Email</b></h6><small> <span><i class="fa fa-envelope" aria-hidden="true"></i></span> BkitSoftware@gmail.com</small>
-                     </div>
-                     <div class="col-xl-3 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3 ">
-                         <h6 class="text-muted bold-text"><b>Personal Email</b></h6><small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> Yuri@gmail.com</small>
+                     <div class="col-lg-4">
+                      <h6 class="text-muted bold-text"><b>Personal Email</b></h6><small><span><i class="fa fa-envelope" aria-hidden="true"></i></span> Yuri@gmail.com</small>
                      </div>
                  </div>
              </div>
          </div>
     </div> 
   </footer>
+<script type="text/javascript">
+    var path = "{{ route('search') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>
 
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');
 
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
 
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function Function() {
+  document.getElementById("myUL").classList.toggle("show");
+}
 
-
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
   <!-- Bootstrap core JavaScript -->
   <script src="{{asset('Frontends/vendor/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('Frontends/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -114,16 +158,7 @@
   <script src="{{asset('Frontends/assets/js/isotope.js')}}"></script>
   <script src="{{asset('Frontends/assets/js/accordions.js')}}"></script>
 
-  <script language = "text/Javascript"> 
-    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-    function clearField(t){                   //declaring the array outside of the
-    if(! cleared[t.id]){                      // function makes it static and global
-        cleared[t.id] = 1;  // you could use true and false, but that's more typing
-        t.value='';         // with more chance of typos
-        t.style.color='#fff';
-        }
-    }
-  </script>
+
   @yield('js')
   
 </html>

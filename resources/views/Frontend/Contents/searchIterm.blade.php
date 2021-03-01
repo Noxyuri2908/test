@@ -1,19 +1,18 @@
 @extends('Frontend.Layouts.index')
 @section('content')
-@include('Frontend.Layouts.slide')
 <section class="blog-posts grid-system">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-8"style="padding-top: 15px;">
         <div class="all-blog-posts">
           <div class="row">
+            @foreach($test as $news)
             <div class="col-lg-6">
-              @foreach($detail as $news)
-              <div class="blog-post" style="width: 700px;">
+              <div class="blog-post" >
                 <div class="blog-thumb">
-                  <img src='{{asset("uploads/news/details/$news->image")}}' width="700px" height="340px" alt="">
+                  <img src='{{asset("uploads/news/details/$news->image")}}'height="340px" alt="">
                 </div>
-                <div class="down-content">
+                <div class="down-content down-content-category">
                   <a href="{{route('get-detail-news', ['id' => $news->id])}}"><h4>{{ $news->title }}</h4></a>
                   <ul class="post-info">
                     <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">Admin</a></li>
@@ -30,45 +29,31 @@
                   </div>
                 </div>
               </div>
-              @endforeach
             </div>
-            <div class="col-lg-12">
-              <ul class="page-numbers">
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-              </ul>
-            </div>
+            @endforeach
           </div>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="sidebar">
           <div class="row">
-            <div class="col-lg-12">
-              <div class="sidebar-item search">
-                <form id="search_form" name="gs" method="GET" action="#">
-                  <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
-                </form>
-              </div>
-            </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="padding-top: -10px;">
               <div class="sidebar-item recent-posts">
                 <div class="sidebar-heading">
                   <h2>Recent News</h2>
                 </div>
-                <div class="content">
-                  <ul>
+                <div>
                     @foreach($lastestDetail as $news)
-                    <li><a href="{{route('get-detail-news', ['id' => $news->id])}}">
-                      <h5>{{ $news->title }}</h5>
-                      <span>{{ $news->updated_at }}</span>
-                    </a></li>
+                    <div class="blog-post row">
+                      <div class="blog-thumb col-lg-6">
+                        <img src='{{asset("uploads/news/details/$news->image")}}' width="150px" height="120px" style="float: left;" alt="">
+                      </div>
+                      <div class="down-content-left col-lg-6">
+                        <a href="{{route('get-detail-news', ['id' => $news->id])}}">{{ $news->title }}</a>
+                      </div>
+                    </div>
                     @endforeach
-                  </ul>
                 </div>
-              </div>
             </div>
             @include('Frontend.Layouts.sidebar')
           </div>

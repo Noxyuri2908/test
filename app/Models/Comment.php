@@ -14,6 +14,6 @@ class Comment extends Model
 
     public function detail()
 	{
-    	return $this->hasMany('App\Models\Detail');
+    	return $this->belongTo('App\Models\Detail');
 	}
 }

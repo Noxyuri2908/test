@@ -50,7 +50,7 @@ class CategoryController extends Controller
     public function postEdit(Request $request,$id)
     {
         $category = $this->categoryModel->find($id);
-        Category::where('id', $id)->update(
+        $this->categoryModel->where('id', $id)->update(
             [
             'name' => $request->name,
             'status' => $request->status

@@ -10,15 +10,22 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
+    protected $commentModel;
+
+    public function __construct(Comment $commentModel)
+    {
+        $this->commentModel = $commentModel;
+    }
+
     public function index()
     {
-        $comments = Comment::all();
+        $comments = $this->commentModel->all();
 
         return view('Backend.Comments.comments_list',['comments' => $comments]);
     }
 
     public function delete($id){
-        $comment = Comment::find($id);
+        $comment = $this->commentModel->find($id);
         $comment->delete();
 
         return redirect()->route('comments-list')->with('success', 'completed!');

@@ -9,17 +9,17 @@
             <div class="col-lg-6">
               <div class="blog-post" style="width: 700px;">
                 <div class="blog-thumb">
-                  <img src='{{asset("uploads/news/details/$detail->image")}}' width="700px" height="340px" alt="">
+                  <img src='{{asset("uploads/news/details/$detailTag->image")}}' width="700px" height="340px" alt="">
                 </div>
                 <div class="down-content">
-                  <span><h12>{{ $detail->category->name }}</h12></span>
-                  <a href="{{route('get-detail-news', ['id' => $detail->id])}}"><h4>{{ $detail->title }}</h4></a>
+                  <span><h12>{{ $detailTag->category->name }}</h12></span>
+                  <a href="{{route('get-detail-news', ['id' => $detailTag->id])}}"><h4>{{ $detailTag->title }}</h4></a>
                   <ul class="post-info">
                     <li><a href="#">Admin</a></li>
-                    <li><a href="#">{{ $detail->updated_at }}</a></li>
-                    <li><a href="#">{{ $detail->view }} Views</a></li>
+                    <li><a href="#">{{ $detailTag->updated_at }}</a></li>
+                    <li><a href="#">{{ $detailTag->view }} Views</a></li>
                   </ul>
-                  <p>{{ $detail->content }}</p>
+                  <p>{{ $detailTag->content }}</p>
                   <div class="post-options">
                     <div class="row">
                       <div class="col-lg-12">

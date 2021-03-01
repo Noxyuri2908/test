@@ -44,7 +44,7 @@ class NewsController extends Controller
         $inputs['slug'] = Str::slug($inputs['title']);
         $inputs['image'] = $inputs['slug'] . '.jpg';
         $this->saveImage($request->image, $inputs['image']);
-        Detail::create($inputs);
+        $this->detailModel->create($inputs);
         
         return redirect()->route('news-list');
     }

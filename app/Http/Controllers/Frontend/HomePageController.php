@@ -26,16 +26,21 @@ class HomePageController extends Controller
 
     public function index()
     {
-        $detail = $this->detailModel->orderBy('created_at', 'desc')->get();
-    	$lastestDetail = $this->detailModel->orderBy('created_at', 'desc')->get()->take(4);
+        $details = $this->detailModel->orderBy('created_at', 'desc')->get();
+        $lastestDetail = $this->detailModel->orderBy('created_at', 'desc')->get()->take(1);
+        $fourLastestDetail = $this->detailModel->orderBy('created_at', 'desc')->get()->take(4);
+        $twoDetail = $this->detailModel->inRandomOrder()->get()->take(2);
+    	$fiveDetail = $this->detailModel->inRandomOrder()->get()->take(5);
         $categories = $this->categoryModel->all();
-    	$tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(15);
-        
+    	$tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(20);
         $data = [
             'categories' => $categories, 
-            'detail' => $detail, 
+            'details' => $details, 
+            'twoDetail' => $twoDetail, 
+            'fiveDetail' => $fiveDetail, 
             'tags' => $tags,
-            'lastestDetail' => $lastestDetail
+            'lastestDetail' => $lastestDetail,
+            'fourLastestDetail' => $fourLastestDetail
         ];
   
     	return view('Frontend.Contents.home', $data);
@@ -87,19 +92,87 @@ class HomePageController extends Controller
         return view('Frontend.Contents.detailNews',$data);
     }
 
+    public function getDetails($id)
+    {
+        $categories = $this->categoryModel->all();
+        $details = $this->detailModel->all();
+        $lastestDetail = $this->detailModel->orderBy('created_at', 'desc')->get()->take(4);
+        $detailsCategory = $this->detailModel->where('category_id', '=', $id)
+            ->orderBy('created_at', 'desc')->get()->take(4);
+        $tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(15);
+        $data = [
+            'categories' => $categories,
+            'detailsCategory' => $detailsCategory, 
+            'details' => $details,
+            'lastestDetail' => $lastestDetail,
+            'tags' => $tags
+        ];
+
+        return view('Frontend.Contents.detailsCategory',$data);
+    }
+
+    public function detailTag($id)
+    {
+        $categories = $this->categoryModel->all();
+        $details = $this->detailModel->all();
+        $lastestDetail = $this->detailModel->orderBy('created_at', 'desc')->get()->take(4);
+        $tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(15);
+        $tag = $this->tagModel->find($id);
+        $detailTag = $this->detailModel->where('id', '=', '$tag->detail_id');
+        dd($detailTag);
+        $data = [
+            'categories' => $categories,
+            'detailTag' => $detailTag, 
+            'details' => $details,
+            'lastestDetail' => $lastestDetail,
+            'tags' => $tags,
+            'tag' => $tag
+        ];
+
+        return view('Frontend.Contents.detailTag',$data);
+    }
+
+    public function getComment(Detail $detail)
+    {
+        return response()->json($detail->comments()->latest()->get());
+    }
+
     public function postComment(Request $request)
     {
-        $detail = Detail::find($request->get('detail_id'));
-        Comment::create(
-            [
-            'name' => $request->name,
-            'slug' => 1,
-            'description' => $request->comment,
-            'detail_id' => $detail->id
-            ]
-        );
+        try {
+            $detail = $this->detailModel->find($request->detail_id);
+            $comment= $this->commentModel->create(
+                [
+                'name' => $request->name,
+                'slug' => 'comment',
+                'description' => $request->comment,
+                'detail_id' => $detail->id
+                ]
+            );
 
-        return redirect()->route('get-detail-news', ['id' => $detail->id]);
+            return response()->json(['status' => true,'name' => $request->name, 'description' => $request->comment, 'date' => $comment->created_at]);
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return response()->json(['status' => false]);
+        }
     } 
 
+    public function search(Request $request){
+        $categories = $this->categoryModel->all();
+        $details = $this->detailModel->all();
+        $lastestDetail = $this->detailModel->orderBy('created_at', 'desc')->get()->take(4);
+        $tags = $this->tagModel->orderBy('created_at', 'desc')->get()->take(15);
+        $search = $request->search;
+        $test  = $this->detailModel->where ( 'title', 'LIKE', '%' . $search . '%' )->orWhere ( 'description', 'LIKE', '%' . $search . '%' )->orWhere ( 'content', 'LIKE', '%' . $search . '%' )->get();
+        $data = [
+            'categories' => $categories, 
+            'details' => $details,
+            'lastestDetail' => $lastestDetail,
+            'tags' => $tags,
+            'test' => $test
+        ];
+
+        return view('Frontend.Contents.searchIterm', $data);
+    }
 }

@@ -67,6 +67,11 @@ Route::namespace('Frontend')->group(function(){
 	Route::get('index', 'HomePageController@index')->name('index');
 	Route::get('detail-news', 'HomePageController@store')->name('detail-news');
 	Route::get('get-detail-news/{id}', 'HomePageController@getNews')->name('get-detail-news');
+	Route::get('get-details-category/{id}', 'HomePageController@getDetails')->name('get-details-category');
+	Route::get('get-detail-tag/{id}', 'HomePageController@detailTag')->name('get-detail-tag');
 
 	Route::post('post-comment', 'HomePageController@postComment')->name('post-comment');
+	Route::post('get-comment', 'HomePageController@getComment')->name('get-comment');
+
+	Route::get('search', 'HomePageController@search')->name('search');
 });
